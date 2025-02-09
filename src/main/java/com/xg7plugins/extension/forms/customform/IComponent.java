@@ -1,4 +1,4 @@
-package com.xg7plugins.temp.xg7geyserforms.forms.customform;
+package com.xg7plugins.extension.forms.customform;
 
 import com.xg7plugins.boot.Plugin;
 import com.xg7plugins.utils.text.Text;
@@ -23,9 +23,9 @@ public interface IComponent {
         @Override
         public Component build(Player player, Plugin plugin) {
             return InputComponent.of(
-                    Text.detectLangOrText(plugin,player,label).join().getText(),
-                    Text.detectLangOrText(plugin,player,placeholder).join().getText(),
-                    Text.detectLangOrText(plugin,player,defText).join().getText()
+                    Text.detectLangs(player, plugin,label).join().getText(),
+                    Text.detectLangs(player, plugin,placeholder).join().getText(),
+                    Text.detectLangs(player, plugin,defText).join().getText()
             );
         }
     }
@@ -42,8 +42,8 @@ public interface IComponent {
 
 
             return DropdownComponent.of(
-                    Text.detectLangOrText(plugin,player,label).join().getText(),
-                    options.stream().map(option -> Text.detectLangOrText(plugin,player,option).join().getText()).collect(Collectors.toList()),
+                    Text.detectLangs(player, plugin,label).join().getText(),
+                    options.stream().map(option -> Text.detectLangs(player, plugin,option).join().getText()).collect(Collectors.toList()),
                     defOption
             );
         }
@@ -61,7 +61,7 @@ public interface IComponent {
         @Override
         public Component build(Player player, Plugin plugin) {
             return SliderComponent.of(
-                    Text.detectLangOrText(plugin,player,label).join().getText(),
+                    Text.detectLangs(player, plugin,label).join().getText(),
                     min,
                     max,
                     step,
@@ -79,7 +79,7 @@ public interface IComponent {
         @Override
         public Component build(Player player, Plugin plugin) {
             return ToggleComponent.of(
-                    Text.detectLangOrText(plugin,player,text).join().getText(),
+                    Text.detectLangs(player, plugin,text).join().getText(),
                     defaultVal
             );
         }

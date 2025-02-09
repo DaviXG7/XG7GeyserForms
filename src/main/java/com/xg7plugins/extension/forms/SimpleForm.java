@@ -1,4 +1,4 @@
-package com.xg7plugins.temp.xg7geyserforms.forms;
+package com.xg7plugins.extension.forms;
 import com.xg7plugins.XG7Plugins;
 import com.xg7plugins.boot.Plugin;
 import com.xg7plugins.utils.text.Text;
@@ -27,8 +27,8 @@ public abstract class SimpleForm extends Form<org.geysermc.cumulus.form.SimpleFo
 
             org.geysermc.cumulus.form.SimpleForm.Builder builder = org.geysermc.cumulus.form.SimpleForm.builder();
 
-            builder.title(Text.detectLangOrText(plugin,player,title).join().getText());
-            builder.content(Text.detectLangOrText(plugin,player,content(player)).join().getText());
+            builder.title(Text.detectLangs(player, plugin,title).join().getText());
+            builder.content(Text.detectLangs(player, plugin,content(player)).join().getText());
 
             buttons(player).forEach(builder::button);
 

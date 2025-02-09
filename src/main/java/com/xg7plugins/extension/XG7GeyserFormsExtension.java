@@ -1,17 +1,60 @@
 package com.xg7plugins.extension;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import com.xg7plugins.boot.Plugin;
+import com.xg7plugins.extension.forms.Form;
+import com.xg7plugins.extensions.Extension;
+import lombok.Getter;
+import org.bukkit.entity.Player;
+import org.geysermc.floodgate.api.FloodgateApi;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import java.util.HashMap;
+
+@Getter
+public class XG7GeyserFormsExtension implements Extension {
+
+    private final HashMap<String, Form<?,?>> forms = new HashMap<>();
+    private static XG7GeyserFormsExtension instance;
+
+    @Override
+    public void onInit() {
+
+        instance = this;
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
+
+    @Override
+    public Plugin getPlugin() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return "XG7GeyserForms";
+    }
+
+    public void registerForm(Form<?,?> creator) {
+        if (creator == null) return;
+        forms.put(creator.getId(), creator);
+    }
+
+    public void unregisterForm(String id) {
+        forms.remove(id);
+    }
+    public boolean contaninsForm(String id) {
+        return forms.containsKey(id);
+    }
+
+    public boolean sendForm(Player player, String form) {
+        if (!FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId())) return false;
+        if (!forms.containsKey(form)) return false;
+
+        forms.get(form).send(player);
+
+        return true;
     }
 }

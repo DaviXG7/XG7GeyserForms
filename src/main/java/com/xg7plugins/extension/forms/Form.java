@@ -1,4 +1,4 @@
-package com.xg7plugins.temp.xg7geyserforms.forms;
+package com.xg7plugins.extension.forms;
 
 import com.xg7plugins.boot.Plugin;
 import lombok.AllArgsConstructor;

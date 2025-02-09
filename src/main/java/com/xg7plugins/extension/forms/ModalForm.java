@@ -1,4 +1,4 @@
-package com.xg7plugins.temp.xg7geyserforms.forms;
+package com.xg7plugins.extension.forms;
 
 import com.xg7plugins.XG7Plugins;
 import com.xg7plugins.boot.Plugin;
@@ -27,10 +27,10 @@ public abstract class ModalForm extends Form<org.geysermc.cumulus.form.ModalForm
         return CompletableFuture.supplyAsync(() -> {
             org.geysermc.cumulus.form.ModalForm.Builder builder = org.geysermc.cumulus.form.ModalForm.builder();
 
-            builder.title(Text.detectLangOrText(plugin,player,title).join().getText());
-            builder.content(Text.detectLangOrText(plugin,player,content).join().getText());
-            builder.button1(Text.detectLangOrText(plugin,player,button1).join().getText());
-            builder.button2(Text.detectLangOrText(plugin,player,button2).join().getText());
+            builder.title(Text.detectLangs(player, plugin,title).join().getText());
+            builder.content(Text.detectLangs(player, plugin,content).join().getText());
+            builder.button1(Text.detectLangs(player, plugin,button1).join().getText());
+            builder.button2(Text.detectLangs(player, plugin,button2).join().getText());
 
             builder.invalidResultHandler((form, response) -> XG7Plugins.taskManager().runAsyncTask(XG7Plugins.getInstance(), "menus", () -> onError(form, response, player)));
             builder.validResultHandler((form, response) -> XG7Plugins.taskManager().runAsyncTask(XG7Plugins.getInstance(),"menus", () -> onFinish(form, response, player)));
