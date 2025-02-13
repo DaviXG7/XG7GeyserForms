@@ -1,5 +1,6 @@
 package com.xg7plugins.extension;
 
+import com.xg7plugins.XG7Plugins;
 import com.xg7plugins.boot.Plugin;
 import com.xg7plugins.extension.forms.Form;
 import com.xg7plugins.extensions.Extension;
@@ -13,13 +14,12 @@ import java.util.HashMap;
 public class XG7GeyserFormsExtension implements Extension {
 
     private final HashMap<String, Form<?,?>> forms = new HashMap<>();
+    @Getter
     private static XG7GeyserFormsExtension instance;
 
     @Override
     public void onInit() {
-
         instance = this;
-
     }
 
     @Override
@@ -29,7 +29,7 @@ public class XG7GeyserFormsExtension implements Extension {
 
     @Override
     public Plugin getPlugin() {
-        return null;
+        return XG7Plugins.getInstance();
     }
 
     @Override
